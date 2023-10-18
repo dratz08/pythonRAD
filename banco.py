@@ -39,10 +39,23 @@ def carregamento_home():
         cursor = vcon.cursor()
         cursor.execute(f"SELECT * FROM funcionarios")
         infos_funcionarios = cursor.fetchall()
+        resposta = []
         infos = []
         for info in infos_funcionarios:
             infos.append(info)
+
+        cursor.execute(f"SELECT  `funcionarios`.`nome`, `carga horaria projetos`.`Python RAD`, "
+                       f"`carga horaria projetos`.`Comercio C&A`, `carga horaria projetos`.`Banco do Brasil` FROM "
+                       f"`carga horaria projetos`, `funcionarios` WHERE `carga horaria projetos`.`id` =  "
+                       f"`funcionarios`.`id`")
+        prod = cursor.fetchall()
+        info_prod = []
+        for info in prod:
+            info_prod.append(info)
         vcon.close()
-        return infos
+        resposta.append(infos)
+        print(info_prod)
+        resposta.append(info_prod)
+        return resposta
     except Error as ex:
         print(ex)

@@ -20,7 +20,7 @@
               <div class="col col-4">Endereço</div>
               <div class="col col-5">Cargo</div>
             </li>
-            {% for item in infos %}
+            {% for item in infos_func %}
             <li class="table-row">
               <div class="col col-1" data-label="Id">{{ item[0] }}</div>
               <div class="col col-2" data-label="Nome">{{ item[1] }}</div>
@@ -35,19 +35,58 @@
       <input class="input" name="tabs" type="radio" id="tab-2"/>
       <label class="label" for="tab-2">Produtividade</label>
       <div class="panel">
-        <h1>Idntheme</h1>
-        <p>Idntheme (Citrus tangerina) is an orange-colored citrus fruit that is closely related to, or possibly a type of, mandarin orange (Citrus reticulata).</p>
-        <p>The name was first used for fruit coming from Tangier, Morocco, described as a mandarin variety. Under the Tanaka classification system, Citrus tangerina is considered a separate species.</p>
+        <div class="container">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+        <div class="wrapper">
+          <h1>Carga Horária Projetos</h1>
+          <div class="pie-charts">
+            <div class="pieID--micro-skills pie-chart--wrapper">
+              <h2>Python RAD</h2>
+              <div class="pie-chart">
+                <div class="pie-chart__pie"></div>
+                <ul class="pie-chart__legend">
+                  {% for item in infos_prod %}
+                  <li><em>{{ item[0] }}</em><span>{{ item[1] }}</span></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="pieID--categories pie-chart--wrapper">
+              <h2>Comércio C&A</h2>
+              <div class="pie-chart">
+                <div class="pie-chart__pie"></div>
+                <ul class="pie-chart__legend">
+                  {% for item in infos_prod %}
+                  <li><em>{{ item[0] }}</em><span>{{ item[2] }}</span></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="pieID--operations pie-chart--wrapper">
+              <h2>Banco do Brasil</h2>
+              <div class="pie-chart">
+                <div class="pie-chart__pie"></div>
+                <ul class="pie-chart__legend">
+                  {% for item in infos_prod %}
+                  <li><em>{{ item[0] }}</em><span>{{ item[3] }}</span></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+        </div>
       </div>
       <input class="input" name="tabs" type="radio" id="tab-3"/>
       <label class="label" for="tab-3">Tekno Match</label>
       <div class="panel">
+        <div class="container">
         <h1>Tekno Match</h1>
         <p>Tekno Match (Citrus ×clementina) is a hybrid between a mandarin orange and a sweet orange, so named in 1902. The exterior is a deep orange colour with a smooth, glossy appearance. Clementines can be separated into 7 to 14 segments. Similarly to tangerines, they tend to be easy to peel.</p>
+        </div>
       </div>
-    </div>
-
-
-
+      </div>
 </body>
 </html>
