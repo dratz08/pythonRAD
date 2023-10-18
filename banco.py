@@ -19,25 +19,30 @@ def login_banco(usuario, senha):  # select
     cursor.execute(query)
     resposta1 = cursor.fetchall()
     if not resposta1:
+        vcon.close()
         return "Usuário Inexistente"
     else:
         query_senha = f"SELECT senha FROM usuarios WHERE id = '{resposta1[0][0]}'"
         cursor.execute(query_senha)
         resposta2 = cursor.fetchall()
         if resposta2[0][0] == senha:
+            vcon.close()
             return "Credenciais corretas"
         else:
+            vcon.close()
             return "Senha Incorreta"
-    vcon.close()
-    #return res
 
 
-def dml(query):  # transações
+def carregamento_home():
     try:
         vcon = ConexaoBDAcademico()
         cursor = vcon.cursor()
-        cursor.execute(query)
-        vcon.commit()
+        cursor.execute(f"SELECT * FROM funcionarios")
+        infos_funcionarios = cursor.fetchall()
+        infos = []
+        for info in infos_funcionarios:
+            infos.append(info)
         vcon.close()
+        return infos
     except Error as ex:
         print(ex)

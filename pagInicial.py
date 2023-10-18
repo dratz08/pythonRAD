@@ -1,8 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, request
+import json
+
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from mysql.connector import Error
 
 import banco
-from banco import login_banco
+from banco import login_banco, carregamento_home
 
 app = Flask(__name__)
 
@@ -24,7 +26,8 @@ def login():
         psswrd = request.form['password']
         res_login = login_banco(user, psswrd)
         if res_login == "Credenciais corretas":
-            return redirect(url_for('home'))
+            funcionarios = carregamento_home()
+            return render_template('home.html', infos=funcionarios)
         else:
             return render_template("login.html", status=res_login)
     else:

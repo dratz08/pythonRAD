@@ -6,45 +6,48 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tabela.css') }}">
 </head>
 <body>
-    <div class="container">
-      <h2>Usuários Cadastrados</h2>
-      <ul class="responsive-table">
-        <li class="table-header">
-          <div class="col col-1">Id</div>
-          <div class="col col-2">Nome</div>
-          <div class="col col-3">Salário</div>
-          <div class="col col-4">Endereço</div>
-          <div class="col col-5">Cargo</div>
-        </li>
-        <li class="table-row">
-          <div class="col col-1" data-label="Id">42235</div>
-          <div class="col col-2" data-label="Nome">John Doe</div>
-          <div class="col col-3" data-label="Salário">$350</div>
-          <div class="col col-4" data-label="Endereço">Pending</div>
-          <div class="col col-5" data-label="Cargo">Pending</div>
-        </li>
-        <li class="table-row">
-          <div class="col col-1" data-label="Id">42235</div>
-          <div class="col col-2" data-label="Nome">John Doe</div>
-          <div class="col col-3" data-label="Salário">$350</div>
-          <div class="col col-4" data-label="Endereço">Pending</div>
-          <div class="col col-5" data-label="Cargo">Pending</div>
-        </li>
-        <li class="table-row">
-          <div class="col col-1" data-label="Id">42235</div>
-          <div class="col col-2" data-label="Nome">John Doe</div>
-          <div class="col col-3" data-label="Salário">$350</div>
-          <div class="col col-4" data-label="Endereço">Pending</div>
-          <div class="col col-5" data-label="Cargo">Pending</div>
-        </li>
-        <li class="table-row">
-          <div class="col col-1" data-label="Id">42235</div>
-          <div class="col col-2" data-label="Nome">John Doe</div>
-          <div class="col col-3" data-label="Salário">$350</div>
-          <div class="col col-4" data-label="Endereço">Pending</div>
-          <div class="col col-5" data-label="Cargo">Pending</div>
-        </li>
-      </ul>
+
+    <div class="tabs">
+      <input class="input" name="tabs" type="radio" id="tab-1" checked="checked"/>
+      <label class="label" for="tab-1">Funcionários</label>
+      <div class="panel">
+        <div class="container">
+          <ul class="responsive-table">
+            <li class="table-header">
+              <div class="col col-1">Id</div>
+              <div class="col col-2">Nome</div>
+              <div class="col col-3">Salário</div>
+              <div class="col col-4">Endereço</div>
+              <div class="col col-5">Cargo</div>
+            </li>
+            {% for item in infos %}
+            <li class="table-row">
+              <div class="col col-1" data-label="Id">{{ item[0] }}</div>
+              <div class="col col-2" data-label="Nome">{{ item[1] }}</div>
+              <div class="col col-3" data-label="Salário">R$ {{ item[2] }}</div>
+              <div class="col col-4" data-label="Endereço">{{ item[3] }}</div>
+              <div class="col col-5" data-label="Cargo">{{ item[4] }}</div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <input class="input" name="tabs" type="radio" id="tab-2"/>
+      <label class="label" for="tab-2">Produtividade</label>
+      <div class="panel">
+        <h1>Idntheme</h1>
+        <p>Idntheme (Citrus tangerina) is an orange-colored citrus fruit that is closely related to, or possibly a type of, mandarin orange (Citrus reticulata).</p>
+        <p>The name was first used for fruit coming from Tangier, Morocco, described as a mandarin variety. Under the Tanaka classification system, Citrus tangerina is considered a separate species.</p>
+      </div>
+      <input class="input" name="tabs" type="radio" id="tab-3"/>
+      <label class="label" for="tab-3">Tekno Match</label>
+      <div class="panel">
+        <h1>Tekno Match</h1>
+        <p>Tekno Match (Citrus ×clementina) is a hybrid between a mandarin orange and a sweet orange, so named in 1902. The exterior is a deep orange colour with a smooth, glossy appearance. Clementines can be separated into 7 to 14 segments. Similarly to tangerines, they tend to be easy to peel.</p>
+      </div>
     </div>
+
+
+
 </body>
 </html>
