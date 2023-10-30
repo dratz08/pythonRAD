@@ -12,6 +12,7 @@ def ConexaoBDAcademico():  # conexão com o BD
         print(ex)
     return con
 
+
 def login_banco(usuario, senha):  # select
     vcon = ConexaoBDAcademico()
     cursor = vcon.cursor()
@@ -62,7 +63,32 @@ def carregamento_home(user):
         resposta.append(infos)
         resposta.append(info_prod)
         resposta.append(info_adm)
-        print(info_adm[0][0])
         return resposta
     except Error as ex:
         print(ex)
+
+
+def dados_edicao(id):
+    vcon = ConexaoBDAcademico()
+    cursor = vcon.cursor()
+    query = f"SELECT  `funcionarios`.`id`, `funcionarios`.`nome`, `funcionarios`.`salario`, `funcionarios`.`endereço`, " \
+            f"`funcionarios`.`cargo`, `usuarios`.`adm` FROM `usuarios`, `funcionarios` " \
+            f"WHERE `usuarios`.`id` = {id}  AND `funcionarios`.`id` = {id}"
+    cursor.execute(query)
+    resposta = cursor.fetchall()
+    dados = []
+    for dado in resposta:
+        dados.append(dado)
+    vcon.close()
+    return dados
+
+
+def update_edicao(id, nome, salario, endereco, cargo, adm):
+    vcon = ConexaoBDAcademico()
+    cursor = vcon.cursor()
+    cursor.execute(f"UPDATE funcionarios SET nome='{nome}',salario={float(salario)},endereço='{endereco}', "
+                   f"cargo='{cargo}' WHERE id={id}")
+    vcon.commit()
+    cursor.execute(f"UPDATE usuarios SET adm={adm} WHERE id={id}")
+    vcon.commit()
+    vcon.close()
