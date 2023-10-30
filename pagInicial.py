@@ -26,8 +26,8 @@ def login():
         psswrd = request.form['password']
         res_login = login_banco(user, psswrd)
         if res_login == "Credenciais corretas":
-            consulta = carregamento_home()
-            return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1])
+            consulta = carregamento_home(user)
+            return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1], adm=consulta[2][0][0])
         else:
             return render_template("login.html", status=res_login)
     else:

@@ -33,7 +33,7 @@ def login_banco(usuario, senha):  # select
             return "Senha Incorreta"
 
 
-def carregamento_home():
+def carregamento_home(user):
     try:
         vcon = ConexaoBDAcademico()
         cursor = vcon.cursor()
@@ -52,10 +52,17 @@ def carregamento_home():
         info_prod = []
         for info in prod:
             info_prod.append(info)
+
+        cursor.execute(f"SELECT `adm` FROM `usuarios` WHERE `usuario` = '{user}'")
+        adm = cursor.fetchall()
+        info_adm = []
+        for info in adm:
+            info_adm.append(info)
         vcon.close()
         resposta.append(infos)
-        print(info_prod)
         resposta.append(info_prod)
+        resposta.append(info_adm)
+        print(info_adm[0][0])
         return resposta
     except Error as ex:
         print(ex)
