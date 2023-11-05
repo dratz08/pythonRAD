@@ -8,23 +8,23 @@
 <body>
 	<div class="container">
 		<h1>Editar Dados</h1>
-		<form method="POST" action="http://127.0.0.1:5000/home_editada">
-			<input type = "hidden" name=id  value="{{ dados[0] }}">
+		<form method="POST" action="http://127.0.0.1:5000/home">
+			<input type = "hidden" name=id_edit  value="{{ dados[0] }}">
 
 			<label for="nome">Nome</label>
-			<input type="text" id="nome" name="nome" value="{{ dados[1] }}" required>
+			<input type="text" id="nome" name="nome_edit" value="{{ dados[1] }}" required>
 
 			<label for="salario">Salário</label>
-			<input type="text" id="salario" name="salario" value="{{ dados[2] }}" required>
+			<input type="text" id="salario" name="salario_edit" value="{{ dados[2] }}" required>
 
 			<label for="endereco">Endereço</label>
-			<input type="text" id="endereco" name="endereco" value="{{ dados[3] }}" required>
+			<input type="text" id="endereco" name="endereco_edit" value="{{ dados[3] }}" required>
 
 			<label for="cargo">Cargo</label>
-			<input type="text" id="cargo" name="cargo" value="{{ dados[4] }}" required>
+			<input type="text" id="cargo" name="cargo_edit" value="{{ dados[4] }}" required>
 
 			<label for="adm">Adm</label>
-			<input type="text" id="adm" name="adm" value="{{ dados[5] }}" required>
+			<input type="text" id="adm" name="adm_edit" value="{{ dados[5] }}" required>
 
 			<button type="submit">Editar</button>
 		</form>

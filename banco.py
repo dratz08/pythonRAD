@@ -102,6 +102,7 @@ def update_edicao(id, nome, salario, endereco, cargo, adm):
     vcon.commit()
     vcon.close()
 
+
 def logar_horas(projeto, hora, usuario):
     vcon = ConexaoBDAcademico()
     cursor = vcon.cursor()
@@ -111,6 +112,7 @@ def logar_horas(projeto, hora, usuario):
     cursor.execute(f"UPDATE `carga horaria projetos` SET `{projeto}`=`{projeto}` + {hora} WHERE id={id[0][0]}")
     vcon.commit()
     vcon.close()
+
 
 def del_user(id):
     vcon = ConexaoBDAcademico()
@@ -122,6 +124,26 @@ def del_user(id):
     cursor.execute(query)
     vcon.commit()
     query = f"DELETE FROM usuarios WHERE usuarios.id = '{id}'"
+    cursor.execute(query)
+    vcon.commit()
+    vcon.close()
+
+
+def add_user(nome, senha, salario, endereco, cargo, adm):
+    vcon = ConexaoBDAcademico()
+    cursor = vcon.cursor()
+    query = f"INSERT INTO usuarios (`usuario`, `senha`, `adm`) VALUES ('{nome}','{senha}','{adm}')"
+    cursor.execute(query)
+    vcon.commit()
+    query = f"SELECT id FROM usuarios WHERE usuario = '{nome}'"
+    cursor.execute(query)
+    id_add = cursor.fetchall()
+    id_add = id_add[0][0]
+    query = f"INSERT INTO funcionarios (`id`, `nome`, `salario`, `endereço`, `cargo`) VALUES ('{id_add}','{nome}'," \
+            f"'{salario}','{endereco}','{cargo}')"
+    cursor.execute(query)
+    vcon.commit()
+    query = f"INSERT INTO `carga horaria projetos`(`id`) VALUES ({id_add})"
     cursor.execute(query)
     vcon.commit()
     vcon.close()
