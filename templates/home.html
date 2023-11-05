@@ -85,6 +85,7 @@
         </div>
       </div>
       <input class="input" name="tabs" type="radio" id="tab-3"/>
+      {% if adm == 0 %}
       <label class="label" for="tab-3">Log Horas</label>
       <div class="panel">
         <div class="container">
@@ -120,9 +121,8 @@
           </ul>
         </div>
       </div>
-      {% if adm == 1 %}
-      <input class="input" name="tabs" type="radio" id="tab-4"/>
-      <label class="label" for="tab-4">Controle</label>
+      {% elif adm == 1 %}
+      <label class="label" for="tab-3">Controle</label>
       <div class="panel">
         <div class="container">
           <ul class="responsive-table">
