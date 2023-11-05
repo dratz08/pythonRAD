@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, url_for
 
-from banco import login_banco, carregamento_home, dados_edicao, update_edicao
+from banco import login_banco, carregamento_home, dados_edicao, update_edicao, logar_horas, del_user
 
 app = Flask(__name__)
 app.secret_key = 'asdklasdiw30u1w0e9qwmasda'
@@ -25,7 +25,8 @@ def login():
         if res_login == "Credenciais corretas":
             session['username'] = user
             consulta = carregamento_home(user)
-            return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1], adm=consulta[2][0][0])
+            num_projetos = len(consulta[3])
+            return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1], adm=consulta[2][0][0], projetos=consulta[3], num_proj=num_projetos)
         else:
             return render_template("login.html", status=res_login)
     else:
@@ -48,11 +49,34 @@ def home_editada():
         endereco_edit = request.form['endereco']
         cargo_edit = request.form['cargo']
         adm_edit = request.form['adm']
-        #print([id_edit, nome_edit, salario_edit, endereco_edit, cargo_edit, adm_edit])
         update_edicao(id_edit, nome_edit, salario_edit, endereco_edit, cargo_edit, adm_edit)
         consulta = carregamento_home(session['username'])
-        return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1], adm=consulta[2][0][0])
+        num_projetos = len(consulta[3])
+        return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1], adm=consulta[2][0][0], projetos=consulta[3], num_proj=num_projetos)
 
+@app.route("/log_horas", methods=['POST'])
+def log_horas():
+    if request.method == 'POST':
+        horas = list(request.form.to_dict().values())
+        projeto = list(request.form.to_dict().keys())
+        logar_horas(projeto[0], horas[0], session['username'])
+        consulta = carregamento_home(session['username'])
+        num_projetos = len(consulta[3])
+        return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1], adm=consulta[2][0][0], projetos=consulta[3], num_proj=num_projetos)
+
+@app.route("/delete", methods=['POST'])
+def delete():
+    if request.method == 'POST':
+        id_delete = request.form['id']
+        del_user(id_delete)
+        consulta = carregamento_home(session['username'])
+        num_projetos = len(consulta[3])
+        return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1], adm=consulta[2][0][0], projetos=consulta[3], num_proj=num_projetos)
+
+@app.route("/add", methods=['POST'])
+def add():
+    if request.method == 'POST':
+        return render_template("add.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -85,10 +85,46 @@
         </div>
       </div>
       <input class="input" name="tabs" type="radio" id="tab-3"/>
-      <label class="label" for="tab-3">Controle</label>
+      <label class="label" for="tab-3">Log Horas</label>
       <div class="panel">
         <div class="container">
-          {% if adm == 1 %}
+          <ul class="responsive-table">
+            <li class="table-header">
+              <div class="col col-1">Nome</div>
+              <div class="col col-2">Projeto</div>
+              <div class="col col-3">Horas</div>
+              <div class="col col-3">Logar Horas</div>
+            </li>
+            {% for item in infos_prod %}
+              {% if item[0]==session['username'] %}
+                {% for i in range(num_proj) %}
+                <link rel="stylesheet" href="{{ url_for('static', filename='css/log_horas.css') }}">
+                <li class="table-row">
+                  <div class="col col-1" data-label="Nome">{{ item[0] }}</div>
+                  <div class="col col-2" data-label="Projeto">{{ projetos[i][0] }}</div>
+                  <div class="col col-3" data-label="Horas">{{ item[i+1] }}</div>
+                  <div class="col col-4" data-label="Logar Horas">
+                    <form method="POST" action="http://127.0.0.1:5000/log_horas">
+                      <input type = "number" name="{{ projetos[i][0] }}" min="1" max="1000">
+                        <button type="submit">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                          </svg>
+                        </button>
+                    </form>
+                  </div>
+                </li>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% if adm == 1 %}
+      <input class="input" name="tabs" type="radio" id="tab-4"/>
+      <label class="label" for="tab-4">Controle</label>
+      <div class="panel">
+        <div class="container">
           <ul class="responsive-table">
             <li class="table-header">
               <div class="col col-1">Nome</div>
@@ -98,7 +134,11 @@
             {% for item in infos_func %}
             <li class="table-row">
               <div class="col col-1" data-label="Nome">{{ item[1] }}</div>
+              {% if item[1] == 'Julia dos Santos Fraga' %}
+              <div class="col col-2" data-label="Status">Presidente</div>
+              {% else %}
               <div class="col col-2" data-label="Status">Alocado em Projeto</div>
+              {% endif %}
               <div class="col col-3" data-label="Editar">
                 <form method="POST" action="http://127.0.0.1:5000/edit">
                   <input type = "hidden" name=id  value="{{ item[0] }}">
@@ -111,23 +151,24 @@
               </div>
             </li>
             {% endfor %}
-          </ul>
-          {% else %}
-          <ul class="responsive-table">
-            <li class="table-header">
-              <div class="col col-1">Nome</div>
-              <div class="col col-2">Status</div>
-            </li>
-            {% for item in infos_func %}
             <li class="table-row">
-              <div class="col col-1" data-label="Nome">{{ item[1] }}</div>
-              <div class="col col-2" data-label="Status">Alocado em Projeto</div>
+              <div class="col col-1" ></div>
+              <div class="col col-2" ></div>
+              <div class="col col-3" data-label="Add">
+                <form method="POST" action="http://127.0.0.1:5000/add">
+                    <button type="submit">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                        <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+                      </svg>
+                    </button>
+                </form>
+              </div>
             </li>
-            {% endfor %}
           </ul>
-          {% endif %}
         </div>
       </div>
       </div>
+      {% endif %}
 </body>
 </html>

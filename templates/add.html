@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+	<div class="container">
+		<h1>Add Usuário</h1>
+		<form method="POST" action="http://127.0.0.1:5000/home_editada">
+
+			<label for="nome">Nome</label>
+			<input type="text" id="nome" name="nome" required>
+
+			<label for="salario">Salário</label>
+			<input type="text" id="salario" name="salario" required>
+
+			<label for="endereco">Endereço</label>
+			<input type="text" id="endereco" name="endereco" required>
+
+			<label for="cargo">Cargo</label>
+			<input type="text" id="cargo" name="cargo" required>
+
+			<label for="adm">Adm</label>
+			<input type="text" id="adm" name="adm" required>
+
+			<button type="submit">Adicionar</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -28,6 +28,10 @@
 
 			<button type="submit">Editar</button>
 		</form>
+		<form method="POST" action="http://127.0.0.1:5000/delete">
+			<input type = "hidden" name=id  value="{{ dados[0] }}">
+			<button type="submit">Deletar</button>
+		</form>
 	</div>
 </body>
 </html>

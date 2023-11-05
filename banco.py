@@ -59,10 +59,19 @@ def carregamento_home(user):
         info_adm = []
         for info in adm:
             info_adm.append(info)
+
+        cursor.execute(f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'carga horaria projetos'"
+                       f" AND COLUMN_NAME != 'id';")
+        query_projetos = cursor.fetchall()
+        projetos = []
+        for proj in query_projetos:
+            projetos.append(proj)
+
         vcon.close()
         resposta.append(infos)
         resposta.append(info_prod)
         resposta.append(info_adm)
+        resposta.append(projetos)
         return resposta
     except Error as ex:
         print(ex)
@@ -90,5 +99,29 @@ def update_edicao(id, nome, salario, endereco, cargo, adm):
                    f"cargo='{cargo}' WHERE id={id}")
     vcon.commit()
     cursor.execute(f"UPDATE usuarios SET adm={adm} WHERE id={id}")
+    vcon.commit()
+    vcon.close()
+
+def logar_horas(projeto, hora, usuario):
+    vcon = ConexaoBDAcademico()
+    cursor = vcon.cursor()
+    query = f"SELECT id FROM usuarios WHERE usuario = '{usuario}'"
+    cursor.execute(query)
+    id = cursor.fetchall()
+    cursor.execute(f"UPDATE `carga horaria projetos` SET `{projeto}`=`{projeto}` + {hora} WHERE id={id[0][0]}")
+    vcon.commit()
+    vcon.close()
+
+def del_user(id):
+    vcon = ConexaoBDAcademico()
+    cursor = vcon.cursor()
+    query = f"DELETE FROM `carga horaria projetos` WHERE `carga horaria projetos`.id = '{id}'"
+    cursor.execute(query)
+    vcon.commit()
+    query = f"DELETE FROM funcionarios WHERE funcionarios.id = '{id}'"
+    cursor.execute(query)
+    vcon.commit()
+    query = f"DELETE FROM usuarios WHERE usuarios.id = '{id}'"
+    cursor.execute(query)
     vcon.commit()
     vcon.close()
