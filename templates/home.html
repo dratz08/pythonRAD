@@ -105,7 +105,7 @@
                   <div class="col col-2" data-label="Projeto">{{ projetos[i][0] }}</div>
                   <div class="col col-3" data-label="Horas">{{ item[i+1] }}</div>
                   <div class="col col-4" data-label="Logar Horas">
-                    <form method="POST" action="http://127.0.0.1:5000/log_horas">
+                    <form method="POST" action="http://dratovsky.pythonanywhere.com/log_horas">
                       <input type = "number" name="{{ projetos[i][0] }}" min="1" max="1000">
                         <button type="submit">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
@@ -140,7 +140,7 @@
               <div class="col col-2" data-label="Status">Alocado em Projeto</div>
               {% endif %}
               <div class="col col-3" data-label="Editar">
-                <form method="POST" action="http://127.0.0.1:5000/edit">
+                <form method="POST" action="http://dratovsky.pythonanywhere.com/edit">
                   <input type = "hidden" name=id  value="{{ item[0] }}">
                     <button type="submit">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"  viewBox="0 0 16 16">
@@ -155,7 +155,7 @@
               <div class="col col-1" ></div>
               <div class="col col-2" ></div>
               <div class="col col-3" data-label="Add">
-                <form method="POST" action="http://127.0.0.1:5000/add">
+                <form method="POST" action="http://dratovsky.pythonanywhere.com/add">
                     <button type="submit">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
                         <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>

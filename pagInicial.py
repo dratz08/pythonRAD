@@ -68,19 +68,6 @@ def edit():
         dados = dados_edicao(id_user)
         return render_template("edit.html", dados=dados[0])
 
-#@app.route("/home_editada", methods=['POST'])
-#def home_editada():
-#    if request.method == 'POST':
-#        id_edit = request.form['id']
-#        nome_edit = request.form['nome']
-#        salario_edit = request.form['salario']
-#        endereco_edit = request.form['endereco']
-#        cargo_edit = request.form['cargo']
-#        adm_edit = request.form['adm']
-#        update_edicao(id_edit, nome_edit, salario_edit, endereco_edit, cargo_edit, adm_edit)
-#        consulta = carregamento_home(session['username'])
-#        num_projetos = len(consulta[3])
-#        return render_template('home.html', infos_func=consulta[0], infos_prod=consulta[1], adm=consulta[2][0][0], projetos=consulta[3], num_proj=num_projetos)
 
 @app.route("/log_horas", methods=['POST'])
 def log_horas():

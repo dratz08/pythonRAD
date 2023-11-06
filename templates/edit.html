@@ -8,7 +8,7 @@
 <body>
 	<div class="container">
 		<h1>Editar Dados</h1>
-		<form method="POST" action="http://127.0.0.1:5000/home">
+		<form method="POST" action="http://dratovsky.pythonanywhere.com/home">
 			<input type = "hidden" name=id_edit  value="{{ dados[0] }}">
 
 			<label for="nome">Nome</label>
@@ -28,7 +28,7 @@
 
 			<button type="submit">Editar</button>
 		</form>
-		<form method="POST" action="http://127.0.0.1:5000/delete">
+		<form method="POST" action="http://dratovsky.pythonanywhere.com/delete">
 			<input type = "hidden" name=id  value="{{ dados[0] }}">
 			<button type="submit">Deletar</button>
 		</form>

@@ -5,8 +5,8 @@ from mysql.connector import Error
 def ConexaoBDAcademico():  # conexão com o BD
     con = None
     try:
-        con = mysql.connector.connect(host='pythonrad.mysql.uhserver.com', user='dratovsky', password='dratz@217122185',
-                                      database='pythonrad'
+        con = mysql.connector.connect(host='dratovsky.mysql.pythonanywhere-services.com', user='dratovsky', password='QmPz)*#!6758UcDgTTerAjkkB$#',
+                                      database='dratovsky$default'
                                       )
     except Error as ex:
         print(ex)
@@ -15,6 +15,7 @@ def ConexaoBDAcademico():  # conexão com o BD
 
 def login_banco(usuario, senha):  # select
     vcon = ConexaoBDAcademico()
+    print(vcon)
     cursor = vcon.cursor()
     query = f"SELECT id FROM usuarios WHERE usuario = '{usuario}'"
     cursor.execute(query)
@@ -38,17 +39,17 @@ def carregamento_home(user):
     try:
         vcon = ConexaoBDAcademico()
         cursor = vcon.cursor()
-        cursor.execute(f"SELECT * FROM funcionarios")
+        cursor.execute("SELECT * FROM funcionarios")
         infos_funcionarios = cursor.fetchall()
         resposta = []
         infos = []
         for info in infos_funcionarios:
             infos.append(info)
 
-        cursor.execute(f"SELECT  `funcionarios`.`nome`, `carga horaria projetos`.`Python RAD`, "
-                       f"`carga horaria projetos`.`Comercio C&A`, `carga horaria projetos`.`Banco do Brasil` FROM "
-                       f"`carga horaria projetos`, `funcionarios` WHERE `carga horaria projetos`.`id` =  "
-                       f"`funcionarios`.`id`")
+        cursor.execute("SELECT  `funcionarios`.`nome`, `carga horaria projetos`.`Python RAD`, "
+                       "`carga horaria projetos`.`Comercio C&A`, `carga horaria projetos`.`Banco do Brasil` FROM "
+                       "`carga horaria projetos`, `funcionarios` WHERE `carga horaria projetos`.`id` =  "
+                       "`funcionarios`.`id`")
         prod = cursor.fetchall()
         info_prod = []
         for info in prod:
@@ -60,8 +61,8 @@ def carregamento_home(user):
         for info in adm:
             info_adm.append(info)
 
-        cursor.execute(f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'carga horaria projetos'"
-                       f" AND COLUMN_NAME != 'id';")
+        cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'carga horaria projetos'"
+                       " AND COLUMN_NAME != 'id';")
         query_projetos = cursor.fetchall()
         projetos = []
         for proj in query_projetos:
